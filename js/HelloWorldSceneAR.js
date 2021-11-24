@@ -45,9 +45,13 @@ export default class HelloWorldSceneAR extends Component {
 
   render() {
     ViroAnimations.registerAnimations({
-      movementOrbit: { properties: { positionX: "-=0.1" }, duration: 3000 },
+      firstMovementOrbit: { properties: { positionX: "-=1.6", positionZ: "-=1.20" }, duration: 20000 },
+      secondMovementOrbit: { properties: { positionX: "-=1.6", positionZ: "+=1.20" }, duration: 20000 },
+      thirdMovementOrbit: { properties: { positionX: "+=1.6", positionZ: "-=1.20" }, duration: 20000 },
+      fourthMovementOrbit: { properties: { positionX: "+=0.6", positionZ: "+=1.20" }, duration: 20000 },
+
       loopRotate: { properties: { rotateY: "+=15" }, duration: 1000 },
-      rotateAndMovePicture: [['movementOrbit'], ['loopRotate']]
+      rotateAndMovePicture: [['firstMovementOrbit', 'secondMovementOrbit', 'thirdMovementOrbit', 'fourthMovementOrbit'], ['loopRotate']]
     });
     // ViroMaterials.createMaterials({ earth: { shininess: 1, lightingModel: "Blinn", diffuseTexture: require('./res/Earth/basic.jpg'), normalTexture: require('./res/Earth/lights.jpg') }});
     // ViroMaterials.createMaterials({ earth: { shininess: 1, lightingModel: "Blinn", diffuseTexture: require('./res/earth/large_scale_detailed_satellite_map_of_the_World.jpg'), normalTexture: require('./res/earth/8k_earth_specular_reflection_map.tif') }})
@@ -75,7 +79,7 @@ export default class HelloWorldSceneAR extends Component {
           heightSegmentCount={30}
           widthSegmentCount={30}
           radius={0.3}
-          position={[3, 0, -3]}
+          position={[3, 0, -4]}
           materials={["earth"]} 
           animation={{
             name: 'rotateAndMovePicture',
