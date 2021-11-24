@@ -45,7 +45,9 @@ export default class HelloWorldSceneAR extends Component {
 
   render() {
     ViroAnimations.registerAnimations({
-      loopRotate: { properties: { rotateY: "+=45" }, duration: 1000 },
+      movementOrbit: { properties: { positionX: "-=0.1" }, duration: 3000 },
+      loopRotate: { properties: { rotateY: "+=15" }, duration: 1000 },
+      rotateAndMovePicture: [['movementOrbit'], ['loopRotate']]
     });
     // ViroMaterials.createMaterials({ earth: { shininess: 1, lightingModel: "Blinn", diffuseTexture: require('./res/Earth/basic.jpg'), normalTexture: require('./res/Earth/lights.jpg') }});
     // ViroMaterials.createMaterials({ earth: { shininess: 1, lightingModel: "Blinn", diffuseTexture: require('./res/earth/large_scale_detailed_satellite_map_of_the_World.jpg'), normalTexture: require('./res/earth/8k_earth_specular_reflection_map.tif') }})
@@ -55,15 +57,28 @@ export default class HelloWorldSceneAR extends Component {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
         <Viro360Image source={require('./res/space.jpg')} />
+        {/* <Viro360Image source={require('./res/space2.jpg')} /> */}
         <ViroAmbientLight color="#FFFFFF" />
         <ViroSphere
-          heightSegmentCount={20}
-          widthSegmentCount={20}
+          heightSegmentCount={30}
+          widthSegmentCount={30}
           radius={0.5}
           position={[0, 0, -2]}
-          materials={["earth"]}
+          materials={["earth"]} //sole
           animation={{
             name: 'loopRotate',
+            run: true,
+            loop: true
+          }}
+        />
+        <ViroSphere
+          heightSegmentCount={30}
+          widthSegmentCount={30}
+          radius={0.3}
+          position={[3, 0, -3]}
+          materials={["earth"]} 
+          animation={{
+            name: 'rotateAndMovePicture',
             run: true,
             loop: true
           }}
